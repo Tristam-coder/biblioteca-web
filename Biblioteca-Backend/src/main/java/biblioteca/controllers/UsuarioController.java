@@ -185,4 +185,33 @@ public class UsuarioController {
                 estadoActivo
         );
     }
+    /**
+     * POST /api/usuarios/login - Iniciar sesión
+     */
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Usuario loginRequest) {
+        try {
+            // Buscar el usuario por email
+            Optional<Usuario> usuarioOpt = usuarioDAO.findByEmail(loginRequest.getEmail());
+
+            if (usuarioOpt.isEmpty()) {
+                // No existe el usuario
+                return ResponseEntity.status(401).body("Usuario no encontrado");
+            }
+
+            Usuario usuario = usuarioOpt.get();
+
+            // Verificar contraseña
+            if (!usuario.getPassword().equals(loginRequest.getPassword())) {
+                return ResponseEntity.status(401).body("Contraseña incorrecta");
+            }
+
+            // Si todo bien, devolvemos los datos del usuario (sin contraseña)
+            return ResponseEntity.ok(convertToDTO(usuario));
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error interno del servidor");
+        }
+    }
+
 }
