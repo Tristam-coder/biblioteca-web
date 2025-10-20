@@ -1,0 +1,364 @@
+.recuperar-contrasena-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.recovery-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: calc(100vh - 140px);
+}
+
+.recovery-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.recovery-card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ecf0f1;
+  color: #95a5a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 3px solid #ecf0f1;
+  transition: all 0.3s;
+}
+
+.step-indicator.active .step-number {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.step-indicator span {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  font-weight: bold;
+  text-align: center;
+}
+
+.step-indicator.active span {
+  color: #3498db;
+}
+
+.step-connector {
+  flex: 1;
+  height: 3px;
+  background: #ecf0f1;
+  margin: 0 0.5rem;
+  transition: all 0.3s;
+}
+
+.step-connector.active {
+  background: #3498db;
+}
+
+/* Step Content */
+.step-content {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.step-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.step-content h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.step-content p {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.recovery-form {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.code-input {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  padding: 1rem;
+}
+
+.resend-code {
+  margin: 1rem 0;
+}
+
+.countdown {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #3498db;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.btn-link:hover {
+  color: #2980b9;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+}
+
+.help-text {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Success Step */
+.success-step {
+  padding: 2rem 0;
+}
+
+.success-icon {
+  font-size: 5rem;
+  color: #27ae60;
+  margin-bottom: 1rem;
+}
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.success-actions .btn-primary,
+.success-actions .btn-outline {
+  min-width: 150px;
+  text-align: center;
+}
+
+/* Recovery Footer */
+.recovery-footer {
+  margin-top: 2rem;
+  text-align: center;
+  border-top: 1px solid #ecf0f1;
+  padding-top: 1.5rem;
+}
+
+.recovery-footer p {
+  color: #5d6d7e;
+}
+
+.recovery-footer a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.recovery-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Recovery Info */
+.recovery-info {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  color: white;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recovery-info h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.security-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.tip-icon {
+  font-size: 1.5rem;
+  background: rgba(255,255,255,0.1);
+  padding: 0.5rem;
+  border-radius: 8px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.tip h3 {
+  margin: 0 0 0.5rem 0;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.tip p {
+  margin: 0;
+  color: #bdc3c7;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.emergency-contact {
+  background: rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.emergency-contact h3 {
+  margin-bottom: 1rem;
+  color: #3498db;
+}
+
+.emergency-contact p {
+  margin-bottom: 0.5rem;
+  color: #bdc3c7;
+}
+
+.contact-info {
+  margin-top: 1rem;
+}
+
+.contact-info p {
+  margin: 0.25rem 0;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .recovery-container {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+  
+  .recovery-info {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .recovery-main {
+    padding: 1rem;
+  }
+  
+  .recovery-card {
+    padding: 2rem;
+  }
+  
+  .progress-steps {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .step-connector {
+    display: none;
+  }
+  
+  .success-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .success-actions .btn-primary,
+  .success-actions .btn-outline {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recovery-card {
+    padding: 1.5rem;
+  }
+  
+  .step-indicator span {
+    font-size: 0.7rem;
+  }
+  
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .code-input {
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+  }
+}
