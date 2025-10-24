@@ -1,54 +1,88 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-export default function Header() {
-  const nav = useNavigate();
-  const logged = !!localStorage.getItem("token");
+const Header = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    // Verificar autenticación al cargar el componente
+    const savedAuth = sessionStorage.getItem('isAuthenticated')
+    const savedAdmin = sessionStorage.getItem('isAdmin')
+    
+    if (savedAuth === 'true') {
+      setIsAuthenticated(true)
+      setIsAdmin(savedAdmin === 'true')
+    }
+  }, [])
+
+  const isActive = (path) => {
+    return location.pathname === path ? 'active' : ''
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuario"); // Limpiar también el usuario
-    nav("/login");
-  };
+    if (window.confirm('¿Está seguro de que desea cerrar sesión?')) {
+      // Limpiar sessionStorage
+      sessionStorage.removeItem('isAuthenticated')
+      sessionStorage.removeItem('isAdmin')
+      sessionStorage.removeItem('userName')
+      
+      // Actualizar estado
+      setIsAuthenticated(false)
+      setIsAdmin(false)
+      
+      // Redirigir al catálogo
+      navigate('/catalogo')
+    }
+  }
 
   return (
-    <header
-      style={{
-        background: "#fff",
-        padding: 12,
-        borderBottom: "1px solid #eee",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 960,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <Link to="/">
-            <strong>Biblioteca</strong>
-          </Link>
+    <header>
+      <div className="header-top">
+        <div className="logo">
+          <h1>Ediciones Saberum</h1>
+          <p>Ven, lee y saborea el conocimiento</p>
         </div>
-        <nav>
-          <Link to="/" style={{ marginRight: 10 }}>
-            Catálogo
-          </Link>
-          {logged ? (
-            <>
-              <Link to="/perfil" style={{ marginRight: 10 }}>
-                Mi perfil
-              </Link>
-              <button onClick={handleLogout}>Salir</button>
-            </>
+        <div className="header-actions">
+          {isAuthenticated ? (
+            <div className="user-menu">
+              <span className="welcome-msg">Bienvenido, Usuario</span>
+              <button className="btn-logout" onClick={handleLogout}>
+                Cerrar Sesión
+              </button> 
+            </div>
           ) : (
-            <Link to="/login">Iniciar sesión</Link>
+            <div className="auth-buttons">
+              <Link to="/registro" className="btn-register">
+                Registrarse
+              </Link>
+              <Link to="/login" className="btn-login">
+                Iniciar Sesión
+              </Link>
+            </div>
           )}
-        </nav>
+        </div>
       </div>
+      <nav>
+        <ul>
+          <li><Link to="/catalogo" className={isActive('/catalogo')}>Catálogo</Link></li>
+          {isAuthenticated && (
+            <li><Link to="/panel-usuario" className={isActive('/panel-usuario')}>Mi Cuenta</Link></li>
+          )}
+          {isAuthenticated && isAdmin && (
+            <li>
+              <Link to="/gestion-usuarios" className={isActive('/gestion-usuarios')}>
+                Administración
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
     </header>
-  );
+  )
 }
+
+export default Header
